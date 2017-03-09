@@ -10,6 +10,14 @@ defmodule DListTest do
     end
   end
 
+  property :singleton do
+    for_all x in int() do
+      dlist = DList.singleton(x)
+
+      DList.to_list(dlist) == [x]
+    end
+  end
+
   property :append do
     for_all {xs, ys} in {list(int()), list(int())} do
       dlist_a = DList.from_list(xs)

@@ -11,6 +11,10 @@ defmodule DList do
 
   def empty, do: from_list([])
 
+  def singleton(x) do
+    cons(empty(), x)
+  end
+
   def append(dlist_a, dlist_b) do
     Utils.compose(dlist_a, dlist_b)
   end
