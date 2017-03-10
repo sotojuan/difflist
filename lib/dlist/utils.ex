@@ -11,7 +11,8 @@ defmodule Utils do
 
   def list_cons(x), do: fn(y) -> [x | y] end
 
-  def const(a, b), do: a
+  def const(a, _b), do: a
 
-  def flipped_const(a, b), do: b
+
+  def flipped_const(_a, b), do: b
 end
