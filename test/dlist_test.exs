@@ -1,6 +1,7 @@
 defmodule DListTest do
   use ExUnit.Case, async: false
   use ExCheck
+  doctest DList
 
   property :list_conversion do
     for_all xs in list(int()) do
