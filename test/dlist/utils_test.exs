@@ -2,6 +2,8 @@ defmodule UtilsTest do
   use ExUnit.Case, async: false
   use ExCheck
 
+  alias DList.Utils
+
   property :compose do
     add_one = fn(x) -> x + 1 end
 

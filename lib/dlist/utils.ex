@@ -1,4 +1,4 @@
-defmodule Utils do
+defmodule DList.Utils do
   @moduledoc false
 
   # 1-arity function

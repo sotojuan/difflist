@@ -9,6 +9,8 @@ defmodule DList do
   Refer to [this](http://h2.jaguarpaw.co.uk/posts/demystifying-dlist/) excellent blog post for more information.
   """
 
+  alias DList.Utils
+
   @type dlist :: (list -> list)
 
   @doc """
