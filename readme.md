@@ -9,7 +9,7 @@ In your `mix.exs`:
 ```elixir
 defp deps do
   [
-    {:dlist, "~> 0.0.0"}
+    {:dlist, "~> 1.0.0"}
   ]
 end
 ```
