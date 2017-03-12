@@ -1,6 +1,7 @@
 defmodule DList do
   @moduledoc """
   Difference lists are a way of encoding a list as the action of preappending them.
+
   Instead of a list being `[1, 2, 3]`, it is the anonymous function `fn(ys) -> [1, 2, 3] ++ ys end`.
 
   Difference lists are fast for left-associated appends (`list ++ [x]`) as they are represented as function composition.
