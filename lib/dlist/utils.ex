@@ -1,4 +1,4 @@
-defmodule DList.Utils do
+defmodule DiffList.Utils do
   @moduledoc false
 
   # 1-arity function

@@ -1,9 +1,9 @@
-defmodule DList.Mixfile do
+defmodule DiffList.Mixfile do
   use Mix.Project
 
   def project do
     [
-      app: :dlist,
+      app: :difflist,
       version: "1.0.0",
       elixir: "~> 1.4",
       build_embedded: Mix.env == :prod,
@@ -37,7 +37,7 @@ defmodule DList.Mixfile do
     [
       maintainers: ["sotojuan"],
       licenses: ["MIT"],
-      links: %{"GitHub" => "https://github.com/sotojuan/dlist"}
+      links: %{"GitHub" => "https://github.com/sotojuan/difflist"}
     ]
   end
 end

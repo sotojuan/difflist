@@ -1,4 +1,4 @@
-# dlist
+# difflist
 
 > [Difference lists](https://en.wikipedia.org/wiki/Difference_list) in Elixir
 
@@ -9,7 +9,7 @@ In your `mix.exs`:
 ```elixir
 defp deps do
   [
-    {:dlist, "~> 1.0.0"}
+    {:difflist, "~> 1.0.0"}
   ]
 end
 ```
@@ -18,47 +18,47 @@ Then run `mix deps.get`.
 
 ## Usage
 
-The best place to read the documentation is in [HexDocs](https://hexdocs.pm/dlist/) or in `iex` (e.g. `h DList.from_list`).
+The best place to read the documentation is in [HexDocs](https://hexdocs.pm/difflist/) or in `iex` (e.g. `h DiffList.from_list`).
 
-This package exposes a `DList` module with the following functions:
+This package exposes a `DiffList` module with the following functions:
 
 ### Creating difference lists
 
-#### `DList.from_list/1`
+#### `DiffList.from_list/1`
 
 Creates a difference list from a regular list.
 
-#### `DList.empty/0`
+#### `DiffList.empty/0`
 
 Creates an empty difference list.
 
-#### `DList.singleton/1`
+#### `DiffList.singleton/1`
 
 Creates a difference list of one element.
 
 ### Using difference lists
 
-#### `DList.append/2`
+#### `DiffList.append/2`
 
 Appends a difference list to another difference list.
 
-#### `DList.cons/2`
+#### `DiffList.cons/2`
 
 Prepends an item to a difference list.
 
-#### `DList.snoc/2`
+#### `DiffList.snoc/2`
 
 Appends an item to a difference list.
 
-#### `DList.head/1`
+#### `DiffList.head/1`
 
 Gets the first item of a difference list.
 
-#### `DList.tail/1`
+#### `DiffList.tail/1`
 
 Gets the tail (a difference list of everything but the first item) of a difference list.
 
-#### `DList.concat/1`
+#### `DiffList.concat/1`
 
 Concatenates a list of difference lists into one difference list.
 

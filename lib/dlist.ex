@@ -1,4 +1,4 @@
-defmodule DList do
+defmodule DiffList do
   @moduledoc """
   Difference lists are a way of encoding a list as the action of preappending them.
 
@@ -9,14 +9,14 @@ defmodule DList do
   Refer to [this](http://h2.jaguarpaw.co.uk/posts/demystifying-dlist/) excellent blog post for more information.
   """
 
-  alias DList.Utils
+  alias DiffList.Utils
 
-  @type dlist :: (list -> list)
+  @type difflist :: (list -> list)
 
   @doc """
   Converts a list into a difference list.
   """
-  @spec from_list(list) :: dlist
+  @spec from_list(list) :: difflist
   def from_list(xs) do
     fn ys -> xs ++ ys end
   end
@@ -26,18 +26,18 @@ defmodule DList do
 
   ## Examples
 
-      iex> DList.from_list([1, 2, 3]) |> DList.to_list
+      iex> DiffList.from_list([1, 2, 3]) |> DiffList.to_list
       [1, 2, 3]
   """
-  @spec to_list(dlist) :: list
-  def to_list(dlist) do
-    dlist.([])
+  @spec to_list(difflist) :: list
+  def to_list(difflist) do
+    difflist.([])
   end
 
   @doc """
   Returns an empty difference list.
   """
-  @spec empty() :: dlist
+  @spec empty() :: difflist
   def empty, do: from_list([])
 
   @doc """
@@ -45,10 +45,10 @@ defmodule DList do
 
   ## Example
 
-      iex> DList.singleton(1) |> DList.to_list
+      iex> DiffList.singleton(1) |> DiffList.to_list
       [1]
   """
-  @spec singleton(any) :: dlist
+  @spec singleton(any) :: difflist
   def singleton(x) do
     cons(empty(), x)
   end
@@ -58,14 +58,14 @@ defmodule DList do
 
   ## Example
 
-      iex> x = DList.from_list([1, 2, 3])
-      iex> y = DList.from_list([4, 5, 6])
-      iex> DList.append(x, y) |> DList.to_list
+      iex> x = DiffList.from_list([1, 2, 3])
+      iex> y = DiffList.from_list([4, 5, 6])
+      iex> DiffList.append(x, y) |> DiffList.to_list
       [1, 2, 3, 4, 5, 6]
   """
-  @spec append(dlist, dlist) :: dlist
-  def append(dlist_a, dlist_b) do
-    Utils.compose(dlist_a, dlist_b)
+  @spec append(difflist, difflist) :: difflist
+  def append(difflist_a, difflist_b) do
+    Utils.compose(difflist_a, difflist_b)
   end
 
   @doc """
@@ -75,13 +75,13 @@ defmodule DList do
 
   ## Example
 
-      iex> x = DList.from_list([2, 3])
-      iex> DList.cons(x, 1) |> DList.to_list
+      iex> x = DiffList.from_list([2, 3])
+      iex> DiffList.cons(x, 1) |> DiffList.to_list
       [1, 2, 3]
   """
-  @spec cons(dlist, any) :: dlist
-  def cons(dlist, x) do
-    Utils.compose(Utils.list_cons(x), dlist)
+  @spec cons(difflist, any) :: difflist
+  def cons(difflist, x) do
+    Utils.compose(Utils.list_cons(x), difflist)
   end
 
   @doc """
@@ -91,13 +91,13 @@ defmodule DList do
 
   ## Example
 
-      iex> x = DList.from_list([1, 2])
-      iex> DList.snoc(x, 3) |> DList.to_list
+      iex> x = DiffList.from_list([1, 2])
+      iex> DiffList.snoc(x, 3) |> DiffList.to_list
       [1, 2, 3]
   """
-  @spec snoc(dlist, any) :: dlist
-  def snoc(dlist, x) do
-    Utils.compose(dlist, Utils.list_cons(x))
+  @spec snoc(difflist, any) :: difflist
+  def snoc(difflist, x) do
+    Utils.compose(difflist, Utils.list_cons(x))
   end
 
   @doc """
@@ -107,12 +107,12 @@ defmodule DList do
 
   ## Example
 
-      iex> x = DList.from_list([1, 2, 3])
-      iex> DList.head(x)
+      iex> x = DiffList.from_list([1, 2, 3])
+      iex> DiffList.head(x)
       1
   """
-  @spec head(dlist) :: any
-  def head(dlist), do: list(&Utils.const/2, dlist)
+  @spec head(difflist) :: any
+  def head(difflist), do: list(&Utils.const/2, difflist)
 
   @doc """
   Gets the tail a difference list.
@@ -121,31 +121,31 @@ defmodule DList do
 
   ## Example
 
-      iex> x = DList.from_list([1, 2, 3])
-      iex> DList.tail(x) |> DList.to_list
+      iex> x = DiffList.from_list([1, 2, 3])
+      iex> DiffList.tail(x) |> DiffList.to_list
       [2, 3]
   """
-  @spec tail(dlist) :: list
-  def tail(dlist), do: list(&Utils.flipped_const/2, dlist)
+  @spec tail(difflist) :: list
+  def tail(difflist), do: list(&Utils.flipped_const/2, difflist)
 
   @doc """
   Concatenates a list of difference lists into one difference list.
 
   ## Example
 
-      iex> x = DList.from_list([1, 2, 3])
-      iex> y = DList.from_list([4, 5, 6])
+      iex> x = DiffList.from_list([1, 2, 3])
+      iex> y = DiffList.from_list([4, 5, 6])
       iex> z = [x, y]
-      iex> DList.concat(z) |> DList.to_list
+      iex> DiffList.concat(z) |> DiffList.to_list
       [1, 2, 3, 4, 5, 6]
   """
-  @spec concat(list(dlist)) :: dlist
-  def concat(dlists) do
-    Enum.reduce(dlists, empty(), fn(x, acc) -> append(acc, x) end)
+  @spec concat(list(difflist)) :: difflist
+  def concat(difflists) do
+    Enum.reduce(difflists, empty(), fn(x, acc) -> append(acc, x) end)
   end
 
-  defp list(fun, dlist) do
-    case to_list(dlist) do
+  defp list(fun, difflist) do
+    case to_list(difflist) do
       [] -> nil
       [h | t] -> fun.(h, from_list(t))
     end
