@@ -27,6 +27,7 @@ defmodule DList.Mixfile do
   defp deps do
     [
       {:excheck, "~> 0.5", only: :test},
+      {:ex_doc, "~> 0.15", only: :dev},
       {:triq, github: "triqng/triq", only: :test},
       {:benchfella, "~> 0.3.0", only: :dev}
     ]
