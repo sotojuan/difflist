@@ -16,6 +16,14 @@ end
 
 Then run `mix deps.get`.
 
+## Background
+
+Difference lists are a way of encoding a list as the action of preappending them. Instead of a list being `[1, 2, 3]`, it is the anonymous function `fn(ys) -> [1, 2, 3] ++ ys end`.
+
+Difference lists are fast for left-associated appends (`list ++ [x]`) as they are represented as function composition.
+
+Refer to [this](http://h2.jaguarpaw.co.uk/posts/demystifying-dlist/) excellent blog post for more information.
+
 ## Usage
 
 The best place to read the documentation is in [HexDocs](https://hexdocs.pm/difflist/) or in `iex` (e.g. `h DiffList.from_list`).
